@@ -5,17 +5,20 @@ require 'mooncell/cli/commands/registry'
 require 'mooncell/cli/commands/base'
 
 module Mooncell
-  # CLI Commands
-  #
-  # @since 0.1.0
-  # @api private
-  module Commands
+  class CLI
+    # CLI Commands
+    #
     # @since 0.1.0
     # @api private
-    def self.get(arguments)
-      Registry.get(arguments)
-    end
+    module Commands
+      # @since 0.1.0
+      # @api private
+      def self.get(arguments)
+        Registry.get(arguments)
+      end
 
-    require 'mooncell/cli/commands/version'
+      require 'mooncell/cli/commands/version'
+      require 'mooncell/cli/commands/console'
+    end
   end
 end

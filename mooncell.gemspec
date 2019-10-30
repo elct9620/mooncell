@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 0.76.0'
 
+  spec.add_dependency 'concurrent-ruby', '~> 1.1.0'
   spec.add_dependency 'dotenv', '~> 2.7.5'
   spec.add_dependency 'faye-websocket', '~> 0.10.9'
   spec.add_dependency 'puma', '~> 4.2.1'

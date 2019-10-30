@@ -13,6 +13,8 @@ module Mooncell
 
   require 'mooncell/environment'
   require 'mooncell/configuration'
+  require 'mooncell/connection'
+  require 'mooncell/connection_pool'
 
   # @since 0.1.0
   # @api private

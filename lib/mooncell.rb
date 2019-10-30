@@ -9,6 +9,7 @@ module Mooncell
   require 'mooncell/command'
   require 'mooncell/respond'
   require 'mooncell/entity'
+  require 'mooncell/protocol'
 
   require 'mooncell/environment'
 

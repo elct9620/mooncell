@@ -28,6 +28,7 @@ module Mooncell
 
       require 'mooncell/cli/commands/version'
       require 'mooncell/cli/commands/console'
+      require 'mooncell/cli/commands/server'
     end
   end
 end

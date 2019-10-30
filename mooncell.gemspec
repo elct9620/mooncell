@@ -31,6 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.76.0'
 
   spec.add_dependency 'dotenv', '~> 2.7.5'
+  spec.add_dependency 'faye-websocket', '~> 0.10.9'
+  spec.add_dependency 'puma', '~> 4.2.1'
   spec.add_dependency 'rack', '~> 2.0'
   spec.add_dependency 'sequel', '~> 5.25.0'
 end

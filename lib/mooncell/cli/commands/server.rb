@@ -9,7 +9,11 @@ module Mooncell
         requires 'all'
 
         def call(*)
-          # TODO: Boot servers
+          protocol = Mooncell::Protocol.get(Mooncell.configuration.protocol)
+          # TODO: Show error messages
+          return if protocol.nil?
+
+          protocol.new.start
         end
 
         register 'server', Commands::Server, aliases: %w[s], app_only: true

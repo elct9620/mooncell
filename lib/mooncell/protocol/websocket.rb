@@ -10,7 +10,7 @@ module Mooncell
 
       include Mooncell::Protocol
 
-      def boot(options = {})
+      def start(options = {})
         Rack::Handler.default.run(WebSocket::Server, options)
       end
     end

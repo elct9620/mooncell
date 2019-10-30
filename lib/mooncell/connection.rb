@@ -10,21 +10,21 @@ module Mooncell
     # @param io [#write] the writable I/O
     #
     # @since 0.1.0
-    def initialize(io, pool)
+    def initialize(io, app)
       @io = io
-      @pool = pool
+      @app = app
 
       prepare
     end
 
     private
 
-    attr_reader :io, :pool
+    attr_reader :io, :app
 
     # @since 0.1.0
     # @api private
     def prepare
-      pool.add(self)
+      app.pool.add(self)
     end
   end
 end

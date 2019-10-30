@@ -8,12 +8,14 @@ module Mooncell
       class Server < Base
         requires 'all'
 
+        # @since 0.1.0
+        # @api private
         def call(*)
-          protocol = Mooncell::Protocol.get(Mooncell.configuration.protocol)
-          # TODO: Show error messages
-          return if protocol.nil?
+          # TODO: Add support for multiple application
+          _, app = Mooncell.configuration.apps.first
+          return if app.nil?
 
-          protocol.new.start
+          app.call
         end
 
         register 'server', Commands::Server, aliases: %w[s], app_only: true

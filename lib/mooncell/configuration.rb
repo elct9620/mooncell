@@ -21,9 +21,25 @@ module Mooncell
     # @api private
     def protocol(name = nil)
       # TODO: Support multiple protocol each server
-      return @settings[:protocol] if name.nil?
+      return settings[:protocol] if name.nil?
 
-      @settings[:protocol] = name.to_s
+      settings[:protocol] = name.to_s
+    end
+
+    # @since 0.1.0
+    # @api private
+    def apps
+      settings.fetch_or_store(:apps, {})
+    end
+
+    # Set App
+    #
+    # @param application [Mooncell::Application] the application
+    #
+    # @since 0.1.0
+    # @api private
+    def app(app)
+      apps[app.app_name] = app.new
     end
 
     private

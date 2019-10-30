@@ -16,6 +16,8 @@ module Mooncell
   require 'mooncell/connection'
   require 'mooncell/connection_pool'
 
+  require 'mooncell/application'
+
   # @since 0.1.0
   # @api private
   @_mutex = Mutex.new

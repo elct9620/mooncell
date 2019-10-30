@@ -40,6 +40,10 @@ module Mooncell
 
     # @since 0.1.0
     # @api private
+    APPS_PATH = 'apps'
+
+    # @since 0.1.0
+    # @api private
     DOTENV_LOCAL_FILE = '.env.local'
 
     # Default `.env` files will be loaded
@@ -84,6 +88,12 @@ module Mooncell
     # @see Mooncell::Environment::DEFAULT_ENF
     def environment
       @environment ||= env[MOONCELL_ENV] || DEFAULT_ENV
+    end
+
+    # @since 0.1.0
+    # @api private
+    def apps_path
+      root.join(APPS_PATH)
     end
 
     # Project environment configuration path

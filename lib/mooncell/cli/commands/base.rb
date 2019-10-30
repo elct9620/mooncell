@@ -13,8 +13,20 @@ module Mooncell
         class << self
           # @since 0.1.0
           # @api private
-          def register(name, command = nil, aliases: [], &block)
-            Registry.add(name, command, aliases: aliases, &block)
+          def register(
+            name,
+            command = nil,
+            aliases: [],
+            app_only: false,
+            &block
+          )
+            Registry.add(
+              name,
+              command,
+              aliases: aliases,
+              app_only: app_only,
+              &block
+            )
           end
         end
       end

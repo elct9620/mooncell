@@ -69,7 +69,9 @@ module Mooncell
     # @since 0.1.0
     # @api private
     def root
-      @root || Pathname.new(Dir.pwd)
+      @root ||= Bundler.root
+    rescue Bundler::GemfileNotFound
+      @root = Pathname.new(Dir.pwd)
     end
 
     # The current environment

@@ -12,7 +12,7 @@ module Mooncell
           Pry.start
         end
 
-        register 'console', Commands::Console, aliases: %w[c]
+        register 'console', Commands::Console, aliases: %w[c], app_only: true
       end
     end
   end

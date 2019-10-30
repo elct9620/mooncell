@@ -17,6 +17,15 @@ module Mooncell
         Registry.get(arguments)
       end
 
+      # @return [Boolean] Is application initialized
+      #
+      # @since 0.1.0
+      # @api private
+      def self.app_initialized?
+        Gem.loaded_specs.key?('mooncell') &&
+          Mooncell.root.join('config', 'boot.rb').exist?
+      end
+
       require 'mooncell/cli/commands/version'
       require 'mooncell/cli/commands/console'
     end

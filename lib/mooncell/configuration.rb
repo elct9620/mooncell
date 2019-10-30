@@ -21,7 +21,7 @@ module Mooncell
     # @api private
     def protocol(name = nil)
       # TODO: Support multiple protocol each server
-      return @settings[:protoco] if nail.nil?
+      return @settings[:protocol] if name.nil?
 
       @settings[:protocol] = name.to_s
     end

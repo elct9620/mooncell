@@ -8,6 +8,8 @@ module Mooncell
       # @since 0.1.0
       # @api private
       class Console < Base
+        requires 'all'
+
         def call(*)
           Pry.start
         end

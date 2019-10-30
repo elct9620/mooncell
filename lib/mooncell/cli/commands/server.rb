@@ -6,6 +6,8 @@ module Mooncell
       # @since 0.1.0
       # @api private
       class Server < Base
+        requires 'all'
+
         def call(*)
           # TODO: Boot servers
         end

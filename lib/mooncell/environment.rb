@@ -86,6 +86,27 @@ module Mooncell
       @environment ||= env[MOONCELL_ENV] || DEFAULT_ENV
     end
 
+    # Project environment configuration path
+    #
+    # @return [Pathname] path to application
+    #
+    # @since 0.1.0
+    # @api private
+    def config
+      root.join('config', 'environment.rb')
+    end
+
+    # @api private
+    alias project_config config
+
+    # Load project environment configuration
+    #
+    # @since 0.1.0
+    # @api private
+    def require_project_environment
+      require project_config.to_s
+    end
+
     private
 
     attr_reader :env

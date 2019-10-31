@@ -26,8 +26,17 @@ module Mooncell
     # @since 0.1.0
     # @api private
     module InstanceMethods
+      # @since 0.1.0
+      # @api private
       def initialize(conn)
         @conn = conn
+      end
+
+      # @since 0.1.0
+      # @api private
+      def responder
+        name = self.class.name.sub(/Commands/, 'Responds')
+        Kernel.const_get(name).new(self)
       end
     end
   end

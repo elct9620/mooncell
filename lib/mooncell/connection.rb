@@ -17,6 +17,15 @@ module Mooncell
       prepare
     end
 
+    # Write data
+    #
+    # @param data [] the data to write
+    #
+    # @since 0.1.0
+    def write(data)
+      io.write(data)
+    end
+
     private
 
     attr_reader :io, :app

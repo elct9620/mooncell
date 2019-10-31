@@ -44,10 +44,13 @@ module Mooncell
     # @api private
     def call(connection, params)
       command_name = params.delete('command')
-      command = @routes[command_name]
-      return if command.nil?
+      command_class = @routes[command_name]
+      return if command_class.nil?
 
-      Kernel.const_get(command).new(connection).call(params)
+      command = Kernel.const_get(command_class).new(connection)
+      command.call(params)
+      response = command.responder.call
+      connection.write(response)
     end
   end
 end

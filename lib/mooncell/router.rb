@@ -47,10 +47,10 @@ module Mooncell
       command_class = @routes[command_name]
       return if command_class.nil?
 
+      # TODO: Need refactor
       command = Kernel.const_get(command_class).new(connection)
       command.call(params)
-      response = command.responder.call
-      connection.write(response)
+      command.respond.send
     end
   end
 end

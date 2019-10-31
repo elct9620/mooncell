@@ -5,6 +5,10 @@ module Mooncell
   #
   # @since 0.1.0
   class Connection
+    # @since 0.1.0
+    # @api private
+    attr_reader :app
+
     # Create a connection
     #
     # @param io [#write] the writable I/O
@@ -28,7 +32,7 @@ module Mooncell
 
     private
 
-    attr_reader :io, :app
+    attr_reader :io
 
     # @since 0.1.0
     # @api private

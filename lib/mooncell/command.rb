@@ -34,7 +34,7 @@ module Mooncell
 
       # @since 0.1.0
       # @api private
-      def responder
+      def respond
         name = self.class.name.sub(/Commands/, 'Responds')
         Kernel.const_get(name).new(self)
       end

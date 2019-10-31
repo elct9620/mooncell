@@ -57,6 +57,12 @@ module Mooncell
       '.env'
     ].freeze
 
+    # @since 0.1.0
+    # @api private
+    CODE_RELOADING = {
+      'development' => true
+    }.freeze
+
     # Initialize a Mooncell Environment
     #
     # @api private
@@ -115,6 +121,16 @@ module Mooncell
     # @api private
     def require_project_environment
       require project_config.to_s
+    end
+
+    # Determine if activate code reloading for current environment
+    #
+    # @return [TrueClass,FalseClass] the result of check
+    #
+    # @since 0.1.0
+    # @api private
+    def code_reloading?
+      !!CODE_RELOADING[environment] # rubocop:disable Style/DoubleNegation
     end
 
     private

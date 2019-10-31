@@ -55,6 +55,7 @@ module Mooncell
             if self.class.requirements.any?
               Mooncell.environment.require_project_environment
               # TODO: Load requirements
+              Mooncell::Loader.setup
             end
             super
           end

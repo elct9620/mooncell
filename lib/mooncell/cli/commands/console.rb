@@ -10,7 +10,21 @@ module Mooncell
       class Console < Base
         requires 'all'
 
+        # Provide code reload for console
+        #
+        # @since 0.1.0
+        # @api private
+        module CodeReloading
+          # @since 0.1.0
+          # @api private
+          def reload!
+            puts 'Reloading...'
+            Mooncell::Loader.reload!
+          end
+        end
+
         def call(*)
+          TOPLEVEL_BINDING.eval('self').__send__(:include, CodeReloading)
           Pry.start
         end
 

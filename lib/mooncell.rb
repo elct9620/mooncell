@@ -11,6 +11,7 @@ module Mooncell
   require 'mooncell/entity'
   require 'mooncell/protocol'
 
+  require 'mooncell/loader'
   require 'mooncell/environment'
   require 'mooncell/configuration'
   require 'mooncell/connection'
@@ -87,5 +88,15 @@ module Mooncell
   # @api private
   def self.environment
     @environment ||= Environment.new
+  end
+
+  # Check if enable code reloading
+  #
+  # @return [TrueClass,FalseClass] the result of check
+  #
+  # @since 0.1.0
+  # @api private
+  def self.code_reloading?
+    environment.code_reloading?
   end
 end

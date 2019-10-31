@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mooncell/application_configuration'
+require 'mooncell/router'
 
 module Mooncell
   # Mooncell Application
@@ -61,7 +62,7 @@ module Mooncell
 
     # @since 0.1.0
     # @api private
-    attr_reader :pool
+    attr_reader :pool, :router
 
     # Create application instance
     #
@@ -69,6 +70,10 @@ module Mooncell
     # @api private
     def initialize
       @pool = ConnectionPool.new
+      @router = Router.new(self)
+
+      # TODO: Add support to reload router
+      setup_router
     end
 
     # Run application
@@ -90,6 +95,20 @@ module Mooncell
     # @api private
     def configuration
       self.class.configuration
+    end
+
+    private
+
+    # @since 0.1.0
+    # @api private
+    def setup_router
+      path =
+        Mooncell
+        .environment
+        .apps_path
+        .join(self.class.app_name, 'config', 'routes.rb')
+      code = File.open(path, 'rb:bom|utf-8', &:read)
+      @router.load(code)
     end
   end
 end

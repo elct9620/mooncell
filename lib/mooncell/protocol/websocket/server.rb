@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'faye/websocket'
+require 'json'
 
 module Mooncell
   module Protocol
@@ -9,7 +10,7 @@ module Mooncell
       #
       # @since 0.1.0
       # @api private
-      class Server < Faye::WebSocket
+      class Server
         # @since 0.1.0
         # @api private
         attr_reader :app
@@ -19,20 +20,27 @@ module Mooncell
         # @since 0.1.0
         # @api private
         def initialize(app, env)
-          super(env)
-
+          @ws = Faye::WebSocket.new(env)
           @app = app
 
-          on :open, &:open
-          on :message, &:message
-          on :close, &:close
+          @ws.on :open, method(:open)
+          @ws.on :message, method(:message)
+          @ws.on :close, method(:close)
+        end
+
+        # Rack Response
+        #
+        # @since 0.1.0
+        # @api private
+        def rack_response
+          @ws.rack_response
         end
 
         # On WebSocket open
         #
         # @since 0.1.0
         # @api private
-        def open
+        def open(_event)
           @conn = Mooncell::Connection.new(self, app)
         end
 
@@ -40,16 +48,29 @@ module Mooncell
         #
         # @since 0.1.0
         # @api private
-        def message
-          # TODO
+        def message(event)
+          # TODO: Support customize serializer
+          params = JSON.parse(event.data)
+          app.router.call(@conn, params)
+        rescue JSON::ParserError
+          # TODO: Handling error
+          write(error: -1)
         end
 
         # On WebSocket close
         #
         # @since 0.1.0
         # @api private
-        def close
+        def close(_event)
           app.pool.delete(@conn)
+        end
+
+        # Writable API
+        #
+        # @since 0.1.0
+        # @api private
+        def write(data)
+          @ws.send(data.to_json)
         end
       end
     end

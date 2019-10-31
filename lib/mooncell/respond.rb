@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'forwardable'
+
 module Mooncell
   # Respond Generator
   #
@@ -14,9 +16,14 @@ module Mooncell
     # @since 0.1.0
     # @api private
     def self.included(base)
+      command = Kernel.const_get(base.name.sub(/Responds/, 'Commands'))
+
       base.class_eval do
+        extend Forwardable
         extend ClassMethods
         include InstanceMethods
+
+        delegate command.exposures => 'command'
       end
     end
 
